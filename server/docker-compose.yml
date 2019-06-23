@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.14
+    container_name:
+      beejee_nginx
+    ports:
+      - 7505:80
+    volumes:
+      - ../app:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - php
+
+  php:
+    build:
+      ./php
+    image: php2:custom
+    container_name:
+      beejee_php
+    volumes:
+      - ../app:/usr/share/nginx/html
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.3
+    restart: always
+    container_name:
+      beejee_db
+    ports:
+      - 3344:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mariadb:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mariadb:db
+    container_name:
+      beejee_pma
+    ports:
+      - 8700:80
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mariadb
