@@ -6,7 +6,7 @@ use app\engine\Db;
 
 return [
     'root_dir' => __DIR__ . "/../",
-    'templates_dir' => __DIR__ . "/../views/",
+    'templates_dir' => __DIR__ . "/../twig/",
     'vendor_dir' => __DIR__ . "/../vendor/",
     'controllers_namespaces' => 'app\controllers\\',
     'components' => [

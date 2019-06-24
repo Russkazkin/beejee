@@ -5,5 +5,8 @@ require_once $config['vendor_dir'] . 'autoload.php';
 
 use app\engine\App;
 
-$app = new App();
-$app->test();
+try {
+    App::call()->run($config);
+} catch (Exception $e) {
+    var_dump($e);
+}
