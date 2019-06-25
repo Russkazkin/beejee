@@ -4,12 +4,11 @@
 namespace app\controllers;
 
 
-use app\engine\Authentication;
 use app\engine\Request;
 use app\interfaces\IRender;
 use Exception;
 
-class Controller implements IRender
+abstract class Controller implements IRender
 {
     private $action;
     private $defaultAction = 'index';

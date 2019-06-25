@@ -6,7 +6,7 @@ namespace app\models\entities;
 
 use Exception;
 
-class DataEntity
+abstract class DataEntity
 {
     public $updateFlags = [];
 

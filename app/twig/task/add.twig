@@ -1,0 +1,30 @@
+<h1 class="mb-4">{{ heading }}</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="name">Name*</label>
+        <input type="text"
+               class="form-control"
+               id="name" name="name"
+               aria-describedby="nameHelp"
+               placeholder="Enter name"
+               required>
+        <small id="nameHelp" class="form-text text-muted">We'll never share your name with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="email">Email*</label>
+        <input type="email"
+               class="form-control"
+               id="email"
+               name="email"
+               aria-describedby="emailHelp"
+               placeholder="Enter email"
+               required>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="text">Text*</label>
+        <textarea class="form-control" name="text" id="text" rows="10" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

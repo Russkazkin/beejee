@@ -78,7 +78,6 @@ class App
         $controller->runAction($this->action);
     }
 
-    //Чтобы обращаться к компонентам как к свойствам, переопределим геттер
     function __get($name)
     {
         return $this->components->get($name);
