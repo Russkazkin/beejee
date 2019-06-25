@@ -55,6 +55,32 @@ abstract class Repository
         return true;
     }
 
+    public function update(DataEntity $entity)
+    {
+        $tableName = $this->getTableName();
+        $updateArr = [];
+        $values = [];
+        foreach ($entity->updateFlags as $key => $value){
+            if($value){
+                $updateArr[] = "`{$key}` = :{$key}";
+                $values[$key] = $entity->getProp($key);
+            }
+        }
+        if(!$updateArr) return false;
+        $updates = implode(", ", $updateArr);
+        $values['id'] = $entity->getProp('id');
+        $sql = "UPDATE `{$tableName}` SET {$updates} WHERE `id` = :id";
+        $this->db->execute($sql, $values);
+        return true;
+    }
+
+    public function delete(DataEntity $entity)
+    {
+        $tableName = $this->getTableName();
+        $sql = "DELETE FROM {$tableName} WHERE id = :id";
+        $this->db->execute($sql, ['id' => $entity->id]);
+    }
+
     public function save(DataEntity $entity)
     {
 

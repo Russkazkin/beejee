@@ -29,4 +29,12 @@ class TaskController extends Controller
         $this->title = 'Add Task';
         echo $this->render('task/add', ['heading' => 'Add Task']);
     }
+
+    public function actionReady(){
+        $id = App::call()->request->getActionParam();
+        $task = App::call()->taskRepository->getOne($id);
+        $task->setProp('status', 1);
+        App::call()->taskRepository->save($task);
+        header('Location: /task/');
+    }
 }

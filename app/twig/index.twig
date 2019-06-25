@@ -7,16 +7,19 @@
 <div class="tasks-wrap">
     {% for task in tasks %}
         <div class="card task-item mb-4" style="width: 18rem;">
-            <img src="/img/{{ product.img }}" class="card-img-top" alt="{{ product.name }} img">
+            <div class="card-ready-icon">
+                {% if task.status %}
+                    <i class="fas fa-check-circle"></i>
+                {% else %}
+                    <i class="fas fa-exclamation-triangle"></i>
+                {% endif %}
+            </div>
             <div class="card-body bg-dark">
                 <h5 class="card-title">{{ task.author }}</h5>
                 <p class="card-text">{{ task.email }}</p>
                 <p class="card-price">{{ task.text }}</p>
                 <a href="/task/edit/{{ task.id }}" class="btn btn-primary btn-sm">Edit</a>
-                <button role="button"
-                        data-id="{{ task.id }}"
-                        class="btn btn-success btn-sm buy">Ready
-                </button>
+                <a href="/task/ready/{{ task.id }}" class="btn btn-success btn-sm">Ready</a>
             </div>
         </div>
     {% endfor %}

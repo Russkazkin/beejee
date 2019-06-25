@@ -16,3 +16,16 @@ html, body {
     flex-wrap: wrap;
     justify-content: space-between;
 }
+.card-ready-icon {
+    padding: .5em;
+    text-align: center;
+    font-size: 5em;
+    background-color: #888;
+
+}
+.card-ready-icon .fa-exclamation-triangle {
+    color: red;
+}
+.card-ready-icon .fa-check-circle {
+    color: green;
+}
