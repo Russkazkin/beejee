@@ -1,2 +1,18 @@
 <h1>{{ heading }}</h1>
-<p>Здесь пока ничего нет, но обязательно скоро будет много всякого интересного!</p>
+<div class="tasks-wrap">
+    {% for task in tasks %}
+        <div class="card task-item mb-4" style="width: 18rem;">
+            <img src="/img/{{ product.img }}" class="card-img-top" alt="{{ product.name }} img">
+            <div class="card-body bg-dark">
+                <h5 class="card-title">{{ task.author }}</h5>
+                <p class="card-text">{{ task.email }}</p>
+                <p class="card-price">{{ task.text }}</p>
+                <a href="/product/card/{{ task.id }}" class="btn btn-primary btn-sm">More</a>
+                <button role="button"
+                        data-id="{{ task.id }}"
+                        class="btn btn-success btn-sm buy">Ready
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+</div>

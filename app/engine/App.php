@@ -5,7 +5,15 @@ namespace app\engine;
 
 
 use app\controllers\SiteController;
+use app\models\repositories\TaskRepository;
 use app\traits\TSingleton;
+
+/**
+ * Class App
+ * @property Request $request
+ * @property TaskRepository $taskRepository
+ * @property Db $db
+ */
 
 class App
 {

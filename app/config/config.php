@@ -3,6 +3,7 @@
 
 use app\engine\Request;
 use app\engine\Db;
+use app\models\repositories\TaskRepository;
 
 return [
     'root_dir' => __DIR__ . "/../",
@@ -22,17 +23,8 @@ return [
         'request' => [
             'class' => Request::class
         ],
-        //По хорошему сделать для репозиториев отедьное простое хранилище
-        //без reflection
-        'basketRepository' => [
-            'class' => BasketRepository::class
+        'taskRepository' => [
+            'class' => TaskRepository::class
         ],
-        'productRepository' => [
-            'class' => ProductRepository::class
-        ],
-        'userRepository' => [
-            'class' => UserRepository::class
-        ]
-
     ]
 ];
