@@ -19,9 +19,4 @@ class TaskRepository extends Repository
         return 'task';
     }
 
-    public function getSortedTasks($key, $order) {
-        $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName} ORDER BY {$key} {$order}";
-        return $this->db->queryAll($sql);
-    }
 }

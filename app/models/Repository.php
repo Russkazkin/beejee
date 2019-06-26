@@ -90,6 +90,12 @@ abstract class Repository
             $this->update($entity);
     }
 
+    public function getSorted($key, $order) {
+        $tableName = $this->getTableName();
+        $sql = "SELECT * FROM {$tableName} ORDER BY {$key} {$order}";
+        return $this->db->queryAll($sql);
+    }
+
     abstract public function getTableName();
 
     abstract public function getEntityClass();

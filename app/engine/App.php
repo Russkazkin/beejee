@@ -11,6 +11,7 @@ use app\traits\TSingleton;
 /**
  * Class App
  * @property Request $request
+ * @property Session $session
  * @property TaskRepository $taskRepository
  * @property Db $db
  */

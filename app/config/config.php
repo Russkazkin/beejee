@@ -2,6 +2,7 @@
 
 
 use app\engine\Request;
+use app\engine\Session;
 use app\engine\Db;
 use app\models\repositories\TaskRepository;
 
@@ -22,6 +23,9 @@ return [
         ],
         'request' => [
             'class' => Request::class
+        ],
+        'session' => [
+            'class' => Session::class
         ],
         'taskRepository' => [
             'class' => TaskRepository::class

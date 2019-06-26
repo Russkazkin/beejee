@@ -78,10 +78,6 @@ class Db
     {
         return $this->query($sql, $params)->fetchAll();
     }
-    public function __toString()
-    {
-        return "Db";
-    }
 
     public function lastInsertId()
     {

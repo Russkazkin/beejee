@@ -6,15 +6,18 @@ namespace app\controllers;
 
 use app\engine\App;
 use app\models\entities\Task;
+use \Exception;
 
 class TaskController extends Controller
 {
     public function actionIndex()
     {
         $this->title = 'Tasks';
-        $key = 'status';
-        $order = 'asc';
-        $tasks = App::call()->taskRepository->getSortedTasks($key, $order);
+        $key = App::call()->session->getProp('sortBy') ?: 'status';
+        $order = App::call()->session->getProp('sortOrder') ?: 'asc';
+        echo $key;
+        echo $order;
+        $tasks = App::call()->taskRepository->getSorted($key, $order);
         echo $this->render('index', ['heading' => 'Tasks', 'tasks' => $tasks]);
     }
 
@@ -53,5 +56,16 @@ class TaskController extends Controller
         $text = $task->getProp('text');
         $this->title = 'Edit Task';
         echo $this->render('task/edit', ['heading' => 'Edit Task', 'text' => $text]);
+    }
+
+    public function actionSort()
+    {
+        if(isset(App::call()->request->getParams()['sortBy'])){
+            App::call()->session->setProp('sortBy', App::call()->request->getParams()['sortBy']);
+            App::call()->session->setProp('sortOrder', App::call()->request->getParams()['sortOrder']);
+            header('Location: /task/');
+        }else{
+            throw new Exception('Sorting Error');
+        }
     }
 }
