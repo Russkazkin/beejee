@@ -15,10 +15,12 @@ class TaskController extends Controller
         $this->title = 'Tasks';
         $key = App::call()->session->getProp('sortBy') ?: 'status';
         $order = App::call()->session->getProp('sortOrder') ?: 'asc';
-        echo $key;
-        echo $order;
         $tasks = App::call()->taskRepository->getSorted($key, $order);
-        echo $this->render('index', ['heading' => 'Tasks', 'tasks' => $tasks]);
+        echo $this->render('index', [
+            'heading' => 'Tasks',
+            'tasks' => $tasks,
+            'sortBy' => $key,
+            'sortOrder' => $order]);
     }
 
     public function actionAdd()

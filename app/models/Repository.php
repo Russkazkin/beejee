@@ -92,8 +92,8 @@ abstract class Repository
 
     public function getSorted($key, $order) {
         $tableName = $this->getTableName();
-        $sql = "SELECT * FROM {$tableName} ORDER BY {$key} {$order}";
-        return $this->db->queryAll($sql);
+        $sql = "SELECT * FROM {$tableName} ORDER BY {$key} {$order} LIMIT :limit OFFSET :offset";
+        return $this->db->queryAll($sql, ['limit' => 3, 'offset' => 3]);
     }
 
     abstract public function getTableName();
