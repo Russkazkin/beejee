@@ -4,7 +4,6 @@
 namespace app\engine;
 
 
-use \Exception;
 
 class Session
 {
@@ -18,7 +17,7 @@ class Session
         if (isset($_SESSION[$prop])) {
             return $_SESSION[$prop];
         } else {
-            throw new Exception("Session property with name {$prop} not found", 404);
+            return null;
         }
     }
 
@@ -26,8 +25,9 @@ class Session
     {
         if (isset($_SESSION[$prop])) {
             unset($_SESSION[$prop]);
+            return true;
         } else {
-            throw new Exception("Session property with name {$prop} not found", 404);
+            return false;
         }
     }
 }
