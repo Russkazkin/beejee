@@ -90,10 +90,10 @@ abstract class Repository
             $this->update($entity);
     }
 
-    public function getSorted($key, $order) {
+    public function getSorted($key, $order, $limit = 200, $offset = 0) {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} ORDER BY {$key} {$order} LIMIT :limit OFFSET :offset";
-        return $this->db->queryAll($sql, ['limit' => 3, 'offset' => 3]);
+        return $this->db->queryAll($sql, ['limit' => 200, 'offset' => 0]);
     }
 
     abstract public function getTableName();
