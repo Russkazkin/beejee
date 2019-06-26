@@ -12,7 +12,9 @@ class TaskController extends Controller
     public function actionIndex()
     {
         $this->title = 'Tasks';
-        $tasks = App::call()->taskRepository->getAll();
+        $key = 'status';
+        $order = 'asc';
+        $tasks = App::call()->taskRepository->getSortedTasks($key, $order);
         echo $this->render('index', ['heading' => 'Tasks', 'tasks' => $tasks]);
     }
 
