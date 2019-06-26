@@ -18,8 +18,10 @@
                 <h5 class="card-title">{{ task.author }}</h5>
                 <p class="card-text">{{ task.email }}</p>
                 <p class="card-price">{{ task.text }}</p>
-                <a href="/task/edit/{{ task.id }}" class="btn btn-primary btn-sm">Edit</a>
-                <a href="/task/ready/{{ task.id }}" class="btn btn-success btn-sm">Ready</a>
+                {% if task.status == 0 %}
+                    <a href="/task/edit/{{ task.id }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="/task/complete/{{ task.id }}" class="btn btn-success btn-sm">Complete</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
