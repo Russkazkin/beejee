@@ -29,3 +29,21 @@ html, body {
 .card-ready-icon .fa-check-circle {
     color: green;
 }
+.pagination-wrap li a{
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: white;
+    background-color: #888;
+    border: 1px solid #dee2e6;
+}
+.pagination-wrap li a:hover,
+.pagination-wrap li a:active {
+    text-decoration: none;
+    background-color: #343a40;
+}
+.pagination-wrap li.active a {
+    background-color: #343a40;
+}

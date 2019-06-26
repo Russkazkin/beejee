@@ -2,7 +2,8 @@
   "require": {
       "twig/twig": "^2.0",
       "ext-json": "*",
-      "ext-pdo": "*"
+      "ext-pdo": "*",
+    "jasongrimes/paginator": "~1.0"
   },
   "autoload": {
     "psr-4": {

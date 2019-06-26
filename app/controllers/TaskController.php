@@ -7,20 +7,29 @@ namespace app\controllers;
 use app\engine\App;
 use app\models\entities\Task;
 use \Exception;
+use JasonGrimes\Paginator;
 
 class TaskController extends Controller
 {
     public function actionIndex()
     {
+
+        $totalItems = 20;
+        $itemsPerPage = 3;
+        $currentPage = 1;
+        $urlPattern = '/task/page/(:num)';
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+
         $this->title = 'Tasks';
         $key = App::call()->session->getProp('sortBy') ?: 'status';
         $order = App::call()->session->getProp('sortOrder') ?: 'asc';
-        $tasks = App::call()->taskRepository->getSorted($key, $order);
+        $tasks = App::call()->taskRepository->getSorted($key, $order, $itemsPerPage, 0);
         echo $this->render('index', [
             'heading' => 'Tasks',
             'tasks' => $tasks,
             'sortBy' => $key,
-            'sortOrder' => $order]);
+            'sortOrder' => $order,
+            'paginator' => $paginator]);
     }
 
     public function actionAdd()
