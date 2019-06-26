@@ -63,7 +63,7 @@ class App
 
     public function runController()
     {
-        $this->controller = $this->request->getControllerName() ?: 'site';
+        $this->controller = $this->request->getControllerName() ?: 'task';
         $this->action = $this->request->getActionName();
         $this->actionParam = $this->request->getActionParam();
 

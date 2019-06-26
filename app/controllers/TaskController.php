@@ -14,7 +14,7 @@ class TaskController extends Controller
     public function actionIndex()
     {
 
-        $totalItems = 20;
+        $totalItems = App::call()->taskRepository->getCount();
         $itemsPerPage = 3;
         $currentPage = 1;
         $urlPattern = '/task/page/(:num)';

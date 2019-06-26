@@ -69,7 +69,7 @@ class Db
     }
 
 
-    public function queryOne($sql, $params)
+    public function queryOne($sql, $params = [])
     {
         return $this->queryAll($sql, $params)[0];
     }

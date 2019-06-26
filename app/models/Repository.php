@@ -30,6 +30,12 @@ abstract class Repository
         $sql = "SELECT * FROM {$tableName}";
         return $this->db->queryAll($sql);
     }
+    public function getCount()
+    {
+        $tableName = $this->getTableName();
+        $sql = "SELECT count(*) as count FROM {$tableName}";
+        return $this->db->queryOne($sql)['count'];
+    }
 
     public function insert(DataEntity $entity)
     {

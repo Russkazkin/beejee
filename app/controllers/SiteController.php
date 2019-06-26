@@ -14,4 +14,9 @@ class SiteController extends Controller
         $tasks = App::call()->taskRepository->getAll();
         echo $this->render('index', ['heading' => 'Главная страница', 'tasks' => $tasks]);
     }
+
+    public function actionLogin()
+    {
+        echo 'Login';
+    }
 }
