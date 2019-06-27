@@ -71,9 +71,11 @@
                 <h5 class="card-title">{{ task.author }}</h5>
                 <p class="card-text">{{ task.email }}</p>
                 <p class="card-price">{{ task.text }}</p>
+                {% if userRole == 1 %}
                 {% if task.status == 0 %}
                     <a href="/task/edit/{{ task.id }}" class="btn btn-primary btn-sm">Edit</a>
                     <a href="/task/complete/{{ task.id }}" class="btn btn-success btn-sm">Complete</a>
+                {% endif %}
                 {% endif %}
             </div>
         </div>

@@ -18,6 +18,7 @@ abstract class Controller implements IRender
     public $param;
     public $title = 'Undefined title';
     public $userName;
+    public $userRole;
     private $renderer;
     protected $request;
     protected $session;
@@ -30,6 +31,7 @@ abstract class Controller implements IRender
     {
         $this->renderer = $renderer;
         $this->userName = App::call()->session->getProp('user')['name'] ?: null;
+        $this->userRole = App::call()->session->getProp('user')['role'] ?: null;
         $this->request = App::call()->request;
         $this->session = App::call()->session;
     }

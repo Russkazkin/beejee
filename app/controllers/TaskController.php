@@ -28,6 +28,7 @@ class TaskController extends Controller
             'tasks' => $tasks,
             'sortBy' => $key,
             'sortOrder' => $order,
+            'userRole' => $this->userRole,
             'paginator' => $paginator]);
     }
 
@@ -48,6 +49,9 @@ class TaskController extends Controller
 
     public function actionComplete()
     {
+        if ($this->userRole != 1) {
+            throw new Exception('Forbidden', 403);
+        }
         $id = $this->request->getActionParam();
         $task = App::call()->taskRepository->getOne($id);
         $task->setProp('status', 1);
@@ -57,6 +61,9 @@ class TaskController extends Controller
 
     public function actionEdit()
     {
+        if ($this->userRole != 1) {
+            throw new Exception('Forbidden', 403);
+        }
         $id = $this->request->getActionParam();
         $task = App::call()->taskRepository->getOne($id);
         if(isset($this->request->getParams()['text'])) {
@@ -98,6 +105,7 @@ class TaskController extends Controller
             'tasks' => $tasks,
             'sortBy' => $key,
             'sortOrder' => $order,
+            'userRole' => $this->userRole,
             'paginator' => $paginator]);
     }
 }
