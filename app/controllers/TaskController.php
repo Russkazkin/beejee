@@ -13,7 +13,6 @@ class TaskController extends Controller
 {
     public function actionIndex()
     {
-
         $totalItems = App::call()->taskRepository->getCount();
         $itemsPerPage = 3;
         $currentPage = 1;
@@ -78,5 +77,26 @@ class TaskController extends Controller
         }else{
             throw new Exception('Sorting Error');
         }
+    }
+
+    public function actionPage()
+    {
+        $totalItems = App::call()->taskRepository->getCount();
+        $itemsPerPage = 3;
+        $currentPage = App::call()->request->getActionParam();
+        $urlPattern = '/task/page/(:num)';
+        $offset = $currentPage * $itemsPerPage - $itemsPerPage;
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+
+        $this->title = 'Tasks';
+        $key = App::call()->session->getProp('sortBy') ?: 'status';
+        $order = App::call()->session->getProp('sortOrder') ?: 'asc';
+        $tasks = App::call()->taskRepository->getSorted($key, $order, $itemsPerPage, $offset);
+        echo $this->render('index', [
+            'heading' => 'Tasks',
+            'tasks' => $tasks,
+            'sortBy' => $key,
+            'sortOrder' => $order,
+            'paginator' => $paginator]);
     }
 }
