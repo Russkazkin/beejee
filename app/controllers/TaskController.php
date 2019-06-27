@@ -20,8 +20,8 @@ class TaskController extends Controller
         $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
 
         $this->title = 'Tasks';
-        $key = App::call()->session->getProp('sortBy') ?: 'status';
-        $order = App::call()->session->getProp('sortOrder') ?: 'asc';
+        $key = $this->session->getProp('sortBy') ?: 'status';
+        $order = $this->session->getProp('sortOrder') ?: 'asc';
         $tasks = App::call()->taskRepository->getSorted($key, $order, $itemsPerPage, 0);
         echo $this->render('index', [
             'heading' => 'Tasks',
@@ -33,11 +33,12 @@ class TaskController extends Controller
 
     public function actionAdd()
     {
-        if(isset(App::call()->request->getParams()['name'])) {
-            $task = new Task(null,
-                            App::call()->request->getParams()['name'],
-                            App::call()->request->getParams()['email'],
-                            App::call()->request->getParams()['text']);
+        if(isset($this->request->getParams()['name'])) {
+            $task = new Task(
+                null,
+                $this->request->getParams()['name'],
+                $this->request->getParams()['email'],
+                $this->request->getParams()['text']);
             App::call()->taskRepository->save($task);
             header('Location: /task/');
         }
@@ -47,7 +48,7 @@ class TaskController extends Controller
 
     public function actionComplete()
     {
-        $id = App::call()->request->getActionParam();
+        $id = $this->request->getActionParam();
         $task = App::call()->taskRepository->getOne($id);
         $task->setProp('status', 1);
         App::call()->taskRepository->save($task);
@@ -56,9 +57,9 @@ class TaskController extends Controller
 
     public function actionEdit()
     {
-        $id = App::call()->request->getActionParam();
+        $id = $this->request->getActionParam();
         $task = App::call()->taskRepository->getOne($id);
-        if(isset(App::call()->request->getParams()['text'])) {
+        if(isset($this->request->getParams()['text'])) {
             $task->setProp('text', App::call()->request->getParams()['text']);
             App::call()->taskRepository->save($task);
             header('Location: /task/');
@@ -70,9 +71,9 @@ class TaskController extends Controller
 
     public function actionSort()
     {
-        if(isset(App::call()->request->getParams()['sortBy'])){
-            App::call()->session->setProp('sortBy', App::call()->request->getParams()['sortBy']);
-            App::call()->session->setProp('sortOrder', App::call()->request->getParams()['sortOrder']);
+        if(isset($this->request->getParams()['sortBy'])){
+            $this->session->setProp('sortBy', App::call()->request->getParams()['sortBy']);
+            $this->session->setProp('sortOrder', App::call()->request->getParams()['sortOrder']);
             header('Location: /task/');
         }else{
             throw new Exception('Sorting Error');
@@ -83,14 +84,14 @@ class TaskController extends Controller
     {
         $totalItems = App::call()->taskRepository->getCount();
         $itemsPerPage = 3;
-        $currentPage = App::call()->request->getActionParam();
+        $currentPage = $this->request->getActionParam();
         $urlPattern = '/task/page/(:num)';
         $offset = $currentPage * $itemsPerPage - $itemsPerPage;
         $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
 
         $this->title = 'Tasks';
-        $key = App::call()->session->getProp('sortBy') ?: 'status';
-        $order = App::call()->session->getProp('sortOrder') ?: 'asc';
+        $key = $this->session->getProp('sortBy') ?: 'status';
+        $order = $this->session->getProp('sortOrder') ?: 'asc';
         $tasks = App::call()->taskRepository->getSorted($key, $order, $itemsPerPage, $offset);
         echo $this->render('index', [
             'heading' => 'Tasks',

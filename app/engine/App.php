@@ -13,6 +13,7 @@ use app\traits\TSingleton;
  * @property Request $request
  * @property Session $session
  * @property TaskRepository $taskRepository
+ * @property Authentication $authentication
  * @property Db $db
  */
 

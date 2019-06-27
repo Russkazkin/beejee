@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\engine\App;
 use app\engine\Request;
 use app\interfaces\IRender;
 use Exception;
@@ -18,7 +19,8 @@ abstract class Controller implements IRender
     public $title = 'Undefined title';
     public $userName;
     private $renderer;
-    public $request;
+    protected $request;
+    protected $session;
 
     /**
      * Controller constructor.
@@ -27,8 +29,9 @@ abstract class Controller implements IRender
     public function __construct(IRender $renderer)
     {
         $this->renderer = $renderer;
-        $this->userName = $_SESSION['user']['name'] ?: null;
-        $this->request = new Request();
+        $this->userName = App::call()->session->getProp('user')['name'] ?: null;
+        $this->request = App::call()->request;
+        $this->session = App::call()->session;
     }
 
     public function runAction($action = null)

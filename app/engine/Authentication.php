@@ -63,4 +63,10 @@ class Authentication
         return null;
     }
 
+    public function logout()
+    {
+        App::call()->session->unsetProp('user');
+        header('Location: /');
+    }
+
 }
