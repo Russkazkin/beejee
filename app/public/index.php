@@ -8,5 +8,5 @@ use app\engine\App;
 try {
     App::call()->run($config);
 } catch (Exception $e) {
-    var_dump($e);
+    echo "Error: {$e->getMessage()}. Code: {$e->getCode()}";
 }
